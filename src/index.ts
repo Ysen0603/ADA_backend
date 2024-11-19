@@ -8,7 +8,13 @@ const app = express();
 const PORT = 3000;
 
 // Middleware
-app.use(cors());
+// Utiliser cors pour autoriser les requêtes depuis votre frontend
+const corsOptions = {
+  origin: 'http://localhost:5173', // URL de votre frontend
+  optionsSuccessStatus: 200 // Certains navigateurs anciens ont des problèmes avec le statut 204
+};
+
+app.use(cors(corsOptions)); // Appliquer les options CORS
 app.use(express.json());
 
 // Connect to MongoDB
