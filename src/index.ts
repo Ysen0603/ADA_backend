@@ -3,9 +3,14 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import analyticsRoutes from './routes/analytics';
 import productsRoutes from './routes/products';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://yassineennaya2264:Q8jChRXcaBcuwtB@cluster0.kxill.mongodb.net/Project';
 
 // Enable CORS for all routes
 app.use(cors({
@@ -19,16 +24,16 @@ app.use(express.json());
 
 // MongoDB connection options
 const mongooseOptions: mongoose.ConnectOptions = {
-  serverSelectionTimeoutMS: 5000,
+  serverSelectionTimeoutMS: 30000, // Increased timeout
   socketTimeoutMS: 45000,
-  connectTimeoutMS: 10000,
+  connectTimeoutMS: 30000,
   maxPoolSize: 10,
 };
 
 // Connect to MongoDB with retry logic
 const connectWithRetry = async () => {
   try {
-    await mongoose.connect('mongodb+srv://yassineennaya2264:Q8jChRXcaBcuwtB@cluster0.kxill.mongodb.net/Project', mongooseOptions);
+    await mongoose.connect(MONGODB_URI, mongooseOptions);
     console.log('Connected to MongoDB Atlas');
   } catch (err) {
     console.error('Failed to connect to MongoDB:', err);

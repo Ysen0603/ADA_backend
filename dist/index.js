@@ -8,8 +8,12 @@ const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const analytics_1 = __importDefault(require("./routes/analytics"));
 const products_1 = __importDefault(require("./routes/products"));
+const dotenv_1 = __importDefault(require("dotenv"));
+// Load environment variables
+dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://yassineennaya2264:Q8jChRXcaBcuwtB@cluster0.kxill.mongodb.net/Project';
 // Enable CORS for all routes
 app.use((0, cors_1.default)({
     origin: '*',
@@ -20,15 +24,15 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json());
 // MongoDB connection options
 const mongooseOptions = {
-    serverSelectionTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 30000, // Increased timeout
     socketTimeoutMS: 45000,
-    connectTimeoutMS: 10000,
+    connectTimeoutMS: 30000,
     maxPoolSize: 10,
 };
 // Connect to MongoDB with retry logic
 const connectWithRetry = async () => {
     try {
-        await mongoose_1.default.connect('mongodb+srv://yassineennaya2264:Q8jChRXcaBcuwtB@cluster0.kxill.mongodb.net/Project', mongooseOptions);
+        await mongoose_1.default.connect(MONGODB_URI, mongooseOptions);
         console.log('Connected to MongoDB Atlas');
     }
     catch (err) {
