@@ -10,7 +10,10 @@ const PORT = 3000;
 // Middleware
 // Utiliser cors pour autoriser les requêtes depuis votre frontend
 const corsOptions = {
-  origin: 'http://localhost:5173', // URL de votre frontend
+  origin: ['http://localhost:5173', 'https://projet-apa.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
   optionsSuccessStatus: 200 // Certains navigateurs anciens ont des problèmes avec le statut 204
 };
 
