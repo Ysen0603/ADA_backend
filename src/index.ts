@@ -1,23 +1,21 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
+import mongoose from 'mongoose';
 import analyticsRoutes from './routes/analytics';
 import productsRoutes from './routes/products';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
-// Utiliser cors pour autoriser les requêtes depuis votre frontend
-const corsOptions = {
-  origin: ['http://localhost:5173', 'https://projet-apa.vercel.app'],
+// Enable CORS for all routes
+app.use(cors({
+  origin: '*', // Allow all origins during development
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200 // Certains navigateurs anciens ont des problèmes avec le statut 204
-};
+  optionsSuccessStatus: 200
+}));
 
-app.use(cors(corsOptions)); // Appliquer les options CORS
 app.use(express.json());
 
 // Connect to MongoDB
