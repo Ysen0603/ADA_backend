@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import analyticsRoutes from './routes/analytics';
-import productsRoutes from './routes/products';
+import analyticsRoutes from '../routes/analytics';
+import productsRoutes from '../routes/products';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
