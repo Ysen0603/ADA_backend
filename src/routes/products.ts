@@ -7,10 +7,6 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const period = req.query.period || '30d';
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
-    const skip = (page - 1) * limit;
-    
     let dateFilter = new Date();
     
     switch(period) {
@@ -27,10 +23,6 @@ router.get('/', async (req, res) => {
         dateFilter.setDate(dateFilter.getDate() - 30);
     }
 
-    // Compter le nombre total de produits
-    const totalProducts = await Product.countDocuments();
-
-    // Récupérer les produits avec pagination
     const products = await Product.aggregate([
       {
         $lookup: {
@@ -62,24 +54,10 @@ router.get('/', async (req, res) => {
       },
       {
         $sort: { totalSales: -1 }
-      },
-      {
-        $skip: skip
-      },
-      {
-        $limit: limit
       }
     ]);
 
-    res.json({
-      products,
-      pagination: {
-        total: totalProducts,
-        page,
-        limit,
-        totalPages: Math.ceil(totalProducts / limit)
-      }
-    });
+    res.json({ products });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal server error' });
