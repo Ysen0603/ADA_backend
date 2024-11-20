@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://yassineennaya2264:Q8jChRXcaBcuwtB@cluster0.kxill.mongodb.net/Project';
 // Configuration CORS
 app.use((0, cors_1.default)({
-    origin: ['https://ada-frontend-nslni1wdd-ennaya-yassines-projects.vercel.app', 'https://ada-backend-p8o0.onrender.com'],
+    origin: ['https://ada-frontend-icrm801vg-ennaya-yassines-projects.vercel.app', 'https://ada-backend-p8o0.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
