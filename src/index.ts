@@ -14,7 +14,7 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://yassineennaya2264:
 
 // Configuration CORS
 app.use(cors({
-  origin: ['https://ada-frontend-icrm801vg-ennaya-yassines-projects.vercel.app', 'https://ada-backend-p8o0.onrender.com'],
+  origin: ['https://ada-frontend.vercel.app', 'https://ada-backend-p8o0.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
