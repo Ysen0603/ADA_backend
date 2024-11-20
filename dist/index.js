@@ -14,17 +14,17 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://yassineennaya2264:Q8jChRXcaBcuwtB@cluster0.kxill.mongodb.net/Project';
-// Enable CORS for all routes
+// Configuration CORS
 app.use((0, cors_1.default)({
-    origin: '*',
+    origin: ['http://localhost:5173', 'https://ada-backend-p8o0.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    optionsSuccessStatus: 200
+    credentials: true
 }));
 app.use(express_1.default.json());
 // MongoDB connection options
 const mongooseOptions = {
-    serverSelectionTimeoutMS: 30000, // Increased timeout
+    serverSelectionTimeoutMS: 30000,
     socketTimeoutMS: 45000,
     connectTimeoutMS: 30000,
     maxPoolSize: 10,
